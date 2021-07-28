@@ -1,2 +1,3 @@
 # A-cool-platformer-game
-A platformer game i wrote using pygame(time spent is 1 week)
+1.The py file is the code
+2.img folder contains the sprites and the level datas u need
