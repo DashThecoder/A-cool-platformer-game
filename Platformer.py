@@ -16,21 +16,21 @@ Screen_width=600
 Screen_height=600
 screen=pygame.display.set_mode((Screen_width,Screen_height))
 pygame.display.set_caption("Mario")
-pygame.display.set_icon(pygame.image.load("guy1.png"))
+pygame.display.set_icon(pygame.image.load("Platformer_assets/guy1.png"))
 #The variables
 tile_size=30
 game_over=0
 level=1
 main_menu=True
-bg_img=pygame.transform.scale(pygame.image.load("sky.png"),(600,600))
-sun_img=pygame.image.load("sun.png")
-mixer.music.load("img_coin.wav")
-restart_img=pygame.image.load("restart_btn.png")
-start_img=pygame.image.load("start_btn.png")
+bg_img=pygame.transform.scale(pygame.image.load("Platformer_assets/sky.png"),(600,600))
+sun_img=pygame.image.load("Platformer_assets/sun.png")
+mixer.music.load("Platformer_assets/img_coin.wav")
+restart_img=pygame.image.load("Platformer_assets/restart_btn.png")
+start_img=pygame.image.load("Platformer_assets/start_btn.png")
 start_img=pygame.transform.scale(start_img,(150,75))
-exit_img=pygame.image.load("exit_btn.png")
+exit_img=pygame.image.load("Platformer_assets/exit_btn.png")
 exit_img=pygame.transform.scale(exit_img,(150,75))
-Victory_img=pygame.image.load("Ending_cup.jpg")
+Victory_img=pygame.image.load("Platformer_assets/Ending_cup.jpg")
 Victory_img=pygame.transform.scale(Victory_img,(600,600))
 coin_amount=0
 max_levels=4
@@ -40,8 +40,8 @@ def reset_level(Level):
     blob_group.empty()
     coin_group.empty()
     exit_group.empty()
-    if path.exists(f"level{level}_data"):
-        pickle_in=open(f"level{level}_data","rb")
+    if path.exists(f"Platformer_assets/level{level}_data"):
+        pickle_in=open(f"Platformer_assets/level{level}_data","rb")
         world_data=pickle.load(pickle_in)
     world=World(world_data)
     return world
@@ -136,12 +136,12 @@ class Atom:
         self.index=0
         self.counter=0
         for num in range(1,5):
-            img_right=pygame.image.load(f"guy{num}.png")
+            img_right=pygame.image.load(f"Platformer_assets/guy{num}.png")
             img_right=pygame.transform.scale(img_right,(20,40))
             img_left=pygame.transform.flip(img_right,True,False)
             self.images_right.append(img_right)
             self.images_left.append(img_left)
-        self.dead_image=pygame.image.load("ghost.png")
+        self.dead_image=pygame.image.load("Platformer_assets/ghost.png")
         self.image=self.images_right[self.index]
         self.rect=self.image.get_rect()
         self.rect.x=x
@@ -154,12 +154,12 @@ class Atom:
 class World:
     def __init__(self,data):
         self.tile_list=[]
-        dirt_img=pygame.image.load("dirt.png")
-        grass_img=pygame.image.load("grass.png")
-        lava_img=pygame.image.load("lava.png")
-        pipe_top_img=pygame.image.load("pipe_top.png")
-        pipe_low_img=pygame.image.load("pipe_down.png")
-        coin_img=pygame.image.load("coin.png")
+        dirt_img=pygame.image.load("Platformer_assets/dirt.png")
+        grass_img=pygame.image.load("Platformer_assets/grass.png")
+        lava_img=pygame.image.load("Platformer_assets/lava.png")
+        pipe_top_img=pygame.image.load("Platformer_assets/pipe_top.png")
+        pipe_low_img=pygame.image.load("Platformer_assets/pipe_down.png")
+        coin_img=pygame.image.load("Platformer_assets/coin.png")
         row_count=0
         for row in data:
             col_count=0
@@ -216,7 +216,7 @@ class World:
 class Ender(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.transform.scale(pygame.image.load("blob.png"),(40,30))
+        self.image=pygame.transform.scale(pygame.image.load("Platformer_assets/blob.png"),(40,30))
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
@@ -231,14 +231,14 @@ class Ender(pygame.sprite.Sprite):
 class Coin(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.image.load("coin.png")
+        self.image=pygame.image.load("Platformer_assets/coin.png")
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
 class Exit(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        img=pygame.image.load("exit.png")
+        img=pygame.image.load("Platformer_assets/exit.png")
         self.image=pygame.transform.scale(img,(tile_size,tile_size+13))
         self.rect=self.image.get_rect()
         self.rect.x=x
@@ -252,8 +252,8 @@ def draw_grid():
     for line in range(0,20):
         pygame.draw.line(screen,(255,255,255),(0,line*tile_size),(Screen_width,line*tile_size))
         pygame.draw.line(screen,(255,255,255),(line*tile_size,0),(line*tile_size,Screen_height))
-if path.exists(f"level{level}_data"):
-    pickle_in=open(f"level{level}_data","rb")
+if path.exists(f"Platformer_assets/level{level}_data"):
+    pickle_in=open(f"Platformer_assets/level{level}_data","rb")
     world_data=pickle.load(pickle_in)
 world=World(world_data)
 atom=Atom(50,Screen_height-65)
@@ -298,5 +298,8 @@ while run:
     for event in pygame.event.get():
         pyquit()
     pygame.display.update()
+
+
+
 
 
